@@ -5,6 +5,8 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 require('dotenv').config(); 
 
+const jwtPass = process.env.JWT_SECRET
+
 //POST route for user registration
 router.post('/register', async (req, res) => {
     const {
@@ -58,7 +60,7 @@ router.post('/login', async (req, res) => {
 
         //Create a JWT token
         const payload = { userId: user._id};
-        const token = jwt.sign(payload, process.env.JWT_SECRET, {
+        const token = jwt.sign(payload, jwtPass, {
             expiresIn: '24h'
         });
 
