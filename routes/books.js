@@ -14,6 +14,7 @@ router.post('/', auth, async(req, res) => {
         language,
         imageUrl,
         cretedAt,
+        publishedIn,
     } = req.body;
 
     try {
@@ -26,6 +27,7 @@ router.post('/', auth, async(req, res) => {
             language,
             imageUrl,
             cretedAt,
+            publishedIn,
             user: req.user
         });
 

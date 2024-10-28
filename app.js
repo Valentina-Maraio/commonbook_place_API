@@ -26,7 +26,7 @@ app.get('/api/books', async (req, res) => {
         const books = await Book.find();
         res.json(books);
     } catch(err) {
-        res.status(500).send('SErver error');
+        res.status(500).send('Server error');
     }
 });
 
@@ -52,6 +52,7 @@ app.post('/api/books', async (req, res) => {
         language,
         imageUrl,
         createdAt,
+        publishedIn,
     } = req.body;
 
     try {
@@ -64,6 +65,7 @@ app.post('/api/books', async (req, res) => {
             language,
             imageUrl,
             createdAt,
+            publishedIn,
         });
         await newBook.save();
         res.status(201).json(newBook);
@@ -83,10 +85,11 @@ app.put('/api/books/:id', async(req, res) => {
         ownedCopies,
         language,
         imageUrl,
+        publishedIn,
     } = req.body;
 
     try {
-        let item = await Book.findById(req.params.id);
+        let book = await Book.findById(req.params.id);
         if(!book) return res.status(404).send('Book not found');
 
         book.title = title;
@@ -96,6 +99,7 @@ app.put('/api/books/:id', async(req, res) => {
         book.ownedCopies = ownedCopies;
         book.language = language;
         book.imageUrl = imageUrl;
+        book.publishedIn = publishedIn;
         await book.save();
 
         res.json(book);

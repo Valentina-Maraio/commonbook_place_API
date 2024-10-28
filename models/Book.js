@@ -32,6 +32,9 @@ const BookShema = new mongoose.Schema({
         type: Date,
         default: Date.now
     },
+    publishedIn: {
+        type: Date,
+    }
 });
 
 module.exports = mongoose.model('Book', BookShema)
